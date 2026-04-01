@@ -18,7 +18,7 @@ This phase covers building a real .NET Web API, containerizing it with Docker us
 | Containerization | Docker (multi-stage build) |
 | Base Image (build) | `mcr.microsoft.com/dotnet/sdk:9.0` |
 | Base Image (runtime) | `mcr.microsoft.com/dotnet/aspnet:9.0` |
-| Exposed Port | `8080` |
+| Exposed Port | `8090` |
 | Deployment Method | Cloned GitHub repo directly on EC2, built image on Linux |
 | Deployment Target | EC2 instance (`devops-server`) from Phase 1 |
 
@@ -82,8 +82,8 @@ RUN dotnet publish -c Release -o /app/publish
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/publish .
-EXPOSE 8080
-ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8090
+ENV ASPNETCORE_URLS=http://+:8090
 ENTRYPOINT ["dotnet", "TaskManagerApi.dll"]
 ```
 
@@ -174,7 +174,7 @@ docker images
 ### Step 7 — Run the Container
 
 ```bash
-docker run -d -p 8080:8080 --name taskmanager taskmanager-api
+docker run -d -p 8090:8090 --name taskmanager taskmanager-api
 ```
 
 **Verify container is running:**
@@ -185,13 +185,13 @@ docker ps
 
 **Test the API:**
 ```bash
-curl http://localhost:8080/weatherforecast
+curl http://localhost:8090/weatherforecast
 # Should return JSON weather data
 ```
 
 **Access publicly from browser:**
 ```
-http://<EC2-PUBLIC-IP>:8080/weatherforecast
+http://<EC2-PUBLIC-IP>:8090/weatherforecast
 ```
 
 ---
@@ -227,7 +227,7 @@ docker buildx build --platform linux/amd64 -t taskmanager-api .
 - [x] .NET SDK installed on EC2
 - [x] Docker image built natively on EC2 (AMD64)
 - [x] Container running with `docker ps` showing `Up`
-- [x] API accessible at `http://<EC2-IP>:8080/weatherforecast`
+- [x] API accessible at `http://<EC2-IP>:8090/weatherforecast`
 
 ---
 
