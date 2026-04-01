@@ -56,7 +56,7 @@ app/
 
 ```bash
 mkdir devops-project/app
-cd devops-project/app
+cd DevOps-Series/app
 
 dotnet new webapi -n TaskManagerApi
 cd TaskManagerApi
