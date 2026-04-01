@@ -16,8 +16,8 @@ This phase covers building a real .NET Web API, containerizing it with Docker us
 |-----------|---------|
 | Application | .NET 8 Web API — Task Manager API |
 | Containerization | Docker (multi-stage build) |
-| Base Image (build) | `mcr.microsoft.com/dotnet/sdk:8.0` |
-| Base Image (runtime) | `mcr.microsoft.com/dotnet/aspnet:8.0` |
+| Base Image (build) | `mcr.microsoft.com/dotnet/sdk:9.0` |
+| Base Image (runtime) | `mcr.microsoft.com/dotnet/aspnet:9.0` |
 | Exposed Port | `8080` |
 | Deployment Method | Cloned GitHub repo directly on EC2, built image on Linux |
 | Deployment Target | EC2 instance (`devops-server`) from Phase 1 |
